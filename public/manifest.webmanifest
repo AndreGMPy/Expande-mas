@@ -1,0 +1,13 @@
+{
+  "name": "EXPANDE+",
+  "short_name": "EXPANDE+",
+  "description": "Marketing y soluciones digitales para hacer crecer tu negocio.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#06070b",
+  "theme_color": "#06070b",
+  "icons": [
+    { "src": "/expande-plus/app-icon-light.png", "sizes": "525x471", "type": "image/png" },
+    { "src": "/expande-plus/app-icon-dark.png", "sizes": "813x705", "type": "image/png" }
+  ]
+}

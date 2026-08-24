@@ -1,0 +1,68 @@
+[
+  {
+    "file": "public/expande-plus/logo-wordmark.png",
+    "width": 3345,
+    "height": 1050,
+    "transparent_background": true
+  },
+  {
+    "file": "public/expande-plus/logo-symbol.png",
+    "width": 1275,
+    "height": 1170,
+    "transparent_background": true
+  },
+  {
+    "file": "public/expande-plus/brand-banner.png",
+    "width": 3513,
+    "height": 1008,
+    "transparent_background": true
+  },
+  {
+    "file": "public/expande-plus/app-icon-light.png",
+    "width": 525,
+    "height": 471,
+    "transparent_background": true
+  },
+  {
+    "file": "public/expande-plus/app-icon-dark.png",
+    "width": 813,
+    "height": 705,
+    "transparent_background": true
+  },
+  {
+    "file": "public/expande-plus/service-social-media.png",
+    "width": 609,
+    "height": 615,
+    "transparent_background": true
+  },
+  {
+    "file": "public/expande-plus/service-analytics.png",
+    "width": 612,
+    "height": 462,
+    "transparent_background": true
+  },
+  {
+    "file": "public/expande-plus/service-web-search.png",
+    "width": 543,
+    "height": 513,
+    "transparent_background": true
+  },
+  {
+    "file": "public/expande-plus/service-responsive-design.png",
+    "width": 789,
+    "height": 651,
+    "transparent_background": true
+  },
+  {
+    "file": "public/expande-plus/service-ai-chatbot.png",
+    "width": 615,
+    "height": 675,
+    "transparent_background": true
+  },
+  {
+    "file": "public/expande-plus/service-security.png",
+    "width": 633,
+    "height": 627,
+    "transparent_background": true
+  }
+]
