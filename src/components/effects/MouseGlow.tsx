@@ -7,7 +7,7 @@ export function MouseGlow() {
   const frameRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const finePointer = window.matchMedia("(pointer: fine)").matches;
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!finePointer || reducedMotion) return;
 

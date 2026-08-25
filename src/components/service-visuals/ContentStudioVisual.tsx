@@ -30,7 +30,7 @@ export function ContentStudioVisual() {
               alt=""
               width={609}
               height={615}
-              sizes="96px"
+              sizes="(max-width: 640px) 76px, 96px"
             />
           </div>
           <span className="content-studio__rec"><i /> REC</span>

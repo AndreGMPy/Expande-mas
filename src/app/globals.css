@@ -806,6 +806,8 @@ img { max-width: 100%; height: auto; }
 @media (hover: hover) and (pointer: fine) {
   .product-visual { transition: transform .3s var(--ease), border-color .3s ease, box-shadow .3s ease; }
   .product-visual:hover { transform: translateY(-3px); border-color: rgba(99,236,245,.18); box-shadow: 0 28px 64px rgba(30,28,55,.18); }
+  .browser-mockup:hover { transform: translateY(-3px) rotateX(1.2deg); }
+  .phone-mockup:hover { transform: translateY(-5px) rotate(1deg); }
   .contact__channels a:hover { transform: translateY(-3px); border-color: rgba(99,236,245,.25); background: rgba(255,255,255,.055); }
   .contact__channels a:hover > svg:last-child { transform: translate(3px,-2px); }
 }
@@ -1397,4 +1399,58 @@ main > section, .services, .why { width: 100%; max-width: 100%; }
   .service__content h4 {
     font-size: 1.7rem;
   }
+}
+
+/* Performance pass: compositor-friendly hero entrance and low-cost touch mode */
+.hero__enter {
+  animation: hero-enter .72s var(--ease) both;
+}
+.hero__enter--1 { --hero-enter-y: 14px; animation-delay: .04s; }
+.hero__enter--2 { --hero-enter-y: 25px; animation-delay: .13s; }
+.hero__enter--3 { --hero-enter-y: 20px; animation-delay: .22s; }
+.hero__enter--4 { --hero-enter-y: 18px; animation-delay: .31s; }
+.hero__enter--5 { --hero-enter-y: 10px; animation-delay: .4s; }
+.hero__enter--visual { --hero-enter-y: 16px; animation-delay: .18s; }
+.hero__symbol { animation: hero-symbol-float 8s ease-in-out infinite; }
+
+@keyframes hero-enter {
+  from { opacity: 0; transform: translate3d(0, var(--hero-enter-y, 20px), 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes hero-symbol-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-1deg); }
+  50% { transform: translate3d(0, -10px, 0) rotate(1deg); }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .mouse-glow { display: none; }
+  .navbar--scrolled {
+    background: rgba(6, 7, 11, .92);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  .navbar__menu {
+    background: rgba(10, 12, 18, .96);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .hero__ambient {
+    width: 400px;
+    height: 400px;
+    filter: blur(72px);
+  }
+  .hero__visual::before { filter: blur(7px); }
+  .hero__symbol { animation: none; }
+  .orbit--outer { animation-duration: 52s; }
+  .orbit--inner { animation: none; }
+  .scroll-cue i::after { animation: none; transform: translateX(0); opacity: .55; }
+  .marquee__track { animation-duration: 52s; }
+  .product-visual { box-shadow: 0 16px 38px rgba(30,28,55,.11); }
+  .browser-mockup, .phone-mockup { transition: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__enter, .hero__symbol { animation: none; }
+  .hero__enter { opacity: 1; transform: none; }
 }

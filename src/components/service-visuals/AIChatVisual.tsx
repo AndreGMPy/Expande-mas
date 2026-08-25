@@ -18,7 +18,7 @@ export function AIChatVisual() {
   const reduced = useReducedMotion();
   return (
     <div className="product-visual ai-visual" aria-hidden="true">
-      <div className="ai-visual__ambient"><Image src="/expande-plus/service-ai-chatbot.png" alt="" width={615} height={675} sizes="110px" /></div>
+      <div className="ai-visual__ambient"><Image src="/expande-plus/service-ai-chatbot.png" alt="" width={615} height={675} sizes="(max-width: 640px) 1px, 112px" /></div>
       <div className="ai-visual__window">
         <div className="product-visual__topbar"><span><MessageCircle size={15} />Asistente digital</span><span className="visual-status"><i /> AI ACTIVE</span></div>
         <div className="ai-visual__messages">

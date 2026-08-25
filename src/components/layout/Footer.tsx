@@ -19,7 +19,7 @@ export function Footer() {
     <footer className="footer">
       <div className="container footer__top">
         <div className="footer__brand">
-          <Image src="/expande-plus/logo-wordmark.png" alt="EXPANDE+" width={3345} height={1050} sizes="210px" />
+          <Image src="/expande-plus/logo-wordmark-expande-plus.png" alt="EXPANDE+" width={1099} height={335} sizes="190px" />
           <p>{siteConfig.slogan}</p>
         </div>
         <div className="footer__column">

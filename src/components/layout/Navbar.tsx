@@ -64,6 +64,7 @@ export function Navbar() {
   const desktopServicesRef = useRef<HTMLLIElement>(null);
   const desktopServicesButtonRef = useRef<HTMLButtonElement>(null);
   const wasMobileOpenRef = useRef(false);
+  const scrolledRef = useRef(false);
 
   const closeMobileMenu = () => {
     setMobileOpen(false);
@@ -76,7 +77,12 @@ export function Navbar() {
   };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
+    const onScroll = () => {
+      const nextScrolled = window.scrollY > 30;
+      if (nextScrolled === scrolledRef.current) return;
+      scrolledRef.current = nextScrolled;
+      setScrolled(nextScrolled);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -124,6 +130,8 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
+    if (!mobileOpen && !desktopServicesOpen) return;
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         if (mobileOpen) closeMobileMenu();
@@ -157,7 +165,7 @@ export function Navbar() {
     };
 
     document.addEventListener("keydown", onKeyDown);
-    document.addEventListener("pointerdown", onPointerDown);
+    if (desktopServicesOpen) document.addEventListener("pointerdown", onPointerDown);
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("pointerdown", onPointerDown);
@@ -168,8 +176,8 @@ export function Navbar() {
     <header className={`navbar ${scrolled ? "navbar--scrolled" : ""} ${mobileOpen ? "navbar--menu-open" : ""}`}>
       <nav className="navbar__inner" aria-label="Navegación principal">
         <a className="navbar__brand" href="#inicio" aria-label="EXPANDE+, ir al inicio" onClick={closeAllMenus}>
-          <Image className="navbar__wordmark" src="/expande-plus/logo-wordmark.png" alt="EXPANDE+" width={3345} height={1050} priority sizes="190px" />
-          <Image className="navbar__symbol" src="/expande-plus/logo-symbol.png" alt="" width={1275} height={1170} priority sizes="48px" />
+          <Image className="navbar__wordmark" src="/expande-plus/logo-wordmark-expande-plus.png" alt="EXPANDE+" width={1099} height={335} sizes="(max-width: 640px) 1px, 186px" />
+          <Image className="navbar__symbol" src="/expande-plus/logo-symbol-expande-plus.png" alt="" width={405} height={370} sizes="(max-width: 640px) 46px, 1px" />
         </a>
 
         <ul className="navbar__links">
@@ -259,7 +267,7 @@ export function Navbar() {
             transition={reduced ? { duration: 0 } : motionConfig.fast}
           >
             <div className="mobile-menu__brand" aria-hidden="true">
-              <Image src="/expande-plus/logo-wordmark.png" alt="" width={3345} height={1050} sizes="160px" />
+              <Image src="/expande-plus/logo-wordmark-expande-plus.png" alt="" width={1099} height={335} sizes="158px" />
             </div>
             <nav className="mobile-menu__scroll" aria-label="Navegación móvil">
               <ul className="mobile-menu__links">
