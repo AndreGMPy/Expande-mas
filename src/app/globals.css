@@ -1099,7 +1099,7 @@ main > section, .services, .why { width: 100%; max-width: 100%; }
   .analytics-visual__chart { width: auto; margin-inline: 12px; padding: 12px; }
   .analytics-visual__chart-head { font-size: .67rem; }
   .analytics-visual__chart svg { width: 100%; height: auto; min-height: 135px; }
-  .analytics-visual__bars { display: none; }
+  .analytics-visual__bars { right: 14px; bottom: 14px; width: 64px; display: flex; }
 
   .website-visual { min-height: 470px; padding: 20px 12px 18px; display: flex; flex-direction: column; align-items: stretch; }
   .website-visual__labels { position: static; margin: 0 4px 13px; }
@@ -1425,6 +1425,7 @@ main > section, .services, .why { width: 100%; max-width: 100%; }
 
 @media (hover: none), (pointer: coarse) {
   .mouse-glow { display: none; }
+  .admin-visual__scanner, .automation-visual__pulse { display: none; }
   .navbar--scrolled {
     background: rgba(6, 7, 11, .92);
     -webkit-backdrop-filter: blur(8px);
@@ -1453,4 +1454,30 @@ main > section, .services, .why { width: 100%; max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   .hero__enter, .hero__symbol { animation: none; }
   .hero__enter { opacity: 1; transform: none; }
+  .content-studio__preview,
+  .calendar-post,
+  .social-calendar__ready,
+  .analytics-visual__metrics > div,
+  .analytics-point,
+  .admin-visual__sidebar,
+  .admin-visual__orders > div,
+  .ai-message,
+  .automation-node,
+  .infrastructure-visual__rows > div {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .content-studio__timeline i,
+  .analytics-visual__bars i,
+  .admin-visual__bars i {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+  .analytics-area { opacity: 1 !important; }
+  .analytics-line,
+  .automation-visual__progress {
+    opacity: 1 !important;
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
 }

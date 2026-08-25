@@ -8,7 +8,14 @@ export function ContentStudioVisual() {
   const reduced = useReducedMotion();
 
   return (
-    <div className="product-visual content-studio" aria-hidden="true">
+    <motion.div
+      className="product-visual content-studio"
+      aria-hidden="true"
+      initial={reduced ? "visible" : "hidden"}
+      animate={reduced ? "visible" : undefined}
+      whileInView={reduced ? undefined : "visible"}
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <div className="product-visual__topbar">
         <span><Film size={15} />Estudio de contenido</span>
         <span className="visual-status"><i /> Grabando</span>
@@ -19,9 +26,7 @@ export function ContentStudioVisual() {
         </div>
         <motion.div
           className="content-studio__preview"
-          initial={reduced ? false : { opacity: 0.75, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          variants={{ hidden: { opacity: 0.75, y: 8 }, visible: { opacity: 1, y: 0 } }}
         >
           <div className="content-studio__preview-grid" />
           <div className="content-studio__subject">
@@ -39,10 +44,10 @@ export function ContentStudioVisual() {
         </motion.div>
         <div className="content-studio__edit">
           <div className="content-studio__controls"><Pause size={14} /><span>00:12 / 00:18</span><Scissors size={14} /></div>
-          <div className="content-studio__timeline"><motion.i initial={reduced ? { scaleX: 1 } : { scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: reduced ? 0 : 0.85 }} /><b /></div>
+          <div className="content-studio__timeline"><motion.i variants={{ hidden: { scaleX: 0 }, visible: { scaleX: 1, transition: { duration: reduced ? 0 : 0.85 } } }} /><b /></div>
           <div className="content-studio__formats"><span className="is-active">Reel</span><span>Historia</span><span>Post</span></div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

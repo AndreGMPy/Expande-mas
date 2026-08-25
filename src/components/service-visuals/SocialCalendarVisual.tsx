@@ -9,10 +9,22 @@ const days = [
   { day: "V", date: "14", item: "Post", tone: "violet" },
 ];
 
+const postVariants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: (index: number) => ({ opacity: 1, scale: 1, transition: { delay: 0.18 + index * 0.08 } }),
+};
+
 export function SocialCalendarVisual() {
   const reduced = useReducedMotion();
   return (
-    <div className="product-visual social-calendar" aria-hidden="true">
+    <motion.div
+      className="product-visual social-calendar"
+      aria-hidden="true"
+      initial={reduced ? "visible" : "hidden"}
+      animate={reduced ? "visible" : undefined}
+      whileInView={reduced ? undefined : "visible"}
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <div className="product-visual__topbar">
         <span><CalendarDays size={15} />Calendario editorial</span>
         <small>Vista ilustrativa</small>
@@ -25,10 +37,8 @@ export function SocialCalendarVisual() {
             {entry.item && (
               <motion.i
                 className={`calendar-post calendar-post--${entry.tone}`}
-                initial={reduced ? false : { opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: reduced ? 0 : 0.18 + index * 0.08 }}
+                custom={index}
+                variants={postVariants}
               >
                 <em />{entry.item}
               </motion.i>
@@ -41,7 +51,7 @@ export function SocialCalendarVisual() {
         <span><b>POST</b> programado</span>
         <span><b>HISTORIA</b> programada</span>
       </div>
-      <motion.div className="social-calendar__ready" initial={reduced ? false : { opacity: 0, y: 6 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: reduced ? 0 : 0.75 }}>Contenido programado</motion.div>
-    </div>
+      <motion.div className="social-calendar__ready" variants={{ hidden: { opacity: 0, y: 6 }, visible: { opacity: 1, y: 0, transition: { delay: reduced ? 0 : 0.75 } } }}>Contenido programado</motion.div>
+    </motion.div>
   );
 }

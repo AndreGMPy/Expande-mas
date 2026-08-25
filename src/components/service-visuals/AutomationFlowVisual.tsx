@@ -10,27 +10,39 @@ const nodes = [
   { label: "Cliente", caption: "Seguimiento recibido", icon: CalendarCheck },
 ];
 
+const nodeVariants = {
+  hidden: { opacity: 0.25, y: 8 },
+  visible: (index: number) => ({ opacity: 1, y: 0, transition: { delay: 0.12 + index * 0.3 } }),
+};
+
 export function AutomationFlowVisual() {
   const reduced = useReducedMotion();
   return (
-    <div className="product-visual automation-visual" aria-hidden="true">
+    <motion.div
+      className="product-visual automation-visual"
+      aria-hidden="true"
+      initial={reduced ? "visible" : "hidden"}
+      animate={reduced ? "visible" : undefined}
+      whileInView={reduced ? undefined : "visible"}
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <div className="product-visual__topbar"><span>Flujo automatizado</span><small>AUTOMATION</small></div>
       <div className="automation-visual__canvas">
         <svg className="automation-visual__line" viewBox="0 0 700 90" preserveAspectRatio="none" role="presentation">
           <path d="M82 45H618" />
-          <motion.path className="automation-visual__progress" d="M82 45H618" initial={reduced ? { pathLength: 1 } : { pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: reduced ? 0 : 1.45 }} />
+          <motion.path className="automation-visual__progress" d="M82 45H618" variants={{ hidden: { pathLength: 0 }, visible: { pathLength: 1, transition: { duration: reduced ? 0 : 1.45 } } }} />
         </svg>
         {nodes.map((node, index) => {
           const Icon = node.icon;
           return (
-            <motion.div className="automation-node" key={node.label} initial={reduced ? false : { opacity: 0.25, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: reduced ? 0 : 0.12 + index * 0.3 }}>
+            <motion.div className="automation-node" key={node.label} custom={index} variants={nodeVariants}>
               <i><Icon size={19} /></i><strong>{node.label}</strong><span>{node.caption}</span>
             </motion.div>
           );
         })}
-        <motion.i className="automation-visual__pulse" initial={reduced ? { opacity: 0 } : { x: 0, opacity: 0 }} whileInView={reduced ? { opacity: 0 } : { x: [0, 126, 252, 380], opacity: [0, 1, 1, 0] }} viewport={{ once: true }} transition={{ duration: 1.45, delay: 0.08, ease: "easeInOut" }} />
+        <motion.i className="automation-visual__pulse" variants={{ hidden: { x: 0, opacity: 0 }, visible: reduced ? { opacity: 0 } : { x: [0, 126, 252, 380], opacity: [0, 1, 1, 0], transition: { duration: 1.45, delay: 0.08, ease: "easeInOut" } } }} />
       </div>
       <div className="automation-visual__footer"><i /> API connected · Flujo sincronizado</div>
-    </div>
+    </motion.div>
   );
 }
